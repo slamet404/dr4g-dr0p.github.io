@@ -1,3 +1,43 @@
 <html>
-HELLO WORLD
+<head>
+  <style>
+    #drop-zone {
+      border: 2px dashed #bbb;
+      border-radius: 5px;
+      padding: 25px;
+      text-align: center;
+      font: 20pt bold 'Vollkorn';
+    }
+  </style>
+</head>
+<body>
+  <div id="drop-zone">Drop files here</div>
+  <script>
+    var dropZone = document.getElementById('drop-zone');
+    
+    dropZone.addEventListener('dragover', handleDragOver, false);
+    dropZone.addEventListener('drop', handleFileSelect, false);
+    
+   function handleFileSelect(evt) {
+  evt.stopPropagation();
+  evt.preventDefault();
+
+  var files = evt.dataTransfer.files;
+  var reader = new FileReader();
+
+ 
+  reader.addEventListener('load', function() {
+    alert(1337);
+  }, false);
+
+  
+  reader.readAsDataURL(files[0]);
+}
+    function handleDragOver(evt) {
+      evt.stopPropagation();
+      evt.preventDefault();
+      evt.dataTransfer.dropEffect = 'copy';
+    }
+  </script>
+</body>
 </html>
